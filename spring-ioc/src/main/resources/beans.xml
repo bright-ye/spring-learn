@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans>
+    <bean id="userService" class="com.minispring.stage2.UserService"/>
+    <bean id="userDao" class="com.minispring.stage2.UserDao"/>
+</beans>
