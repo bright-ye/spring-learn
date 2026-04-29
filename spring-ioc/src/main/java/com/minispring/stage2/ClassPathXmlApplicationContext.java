@@ -27,10 +27,15 @@ public class ClassPathXmlApplicationContext {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
-        InputStream inputStream = this.getClass().getResourceAsStream(config);
-        Document root = documentBuilder.parse(inputStream);
-
-        NodeList nodeList = root.getElementsByTagName("/beans.xml");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(config);
+        if (inputStream == null) {
+            throw new IllegalArgumentException("Config file not found: " + config);
+        }
+        Document doc = documentBuilder.parse(inputStream);
+        
+        // 获取根元素 <beans>
+        Element rootElement = doc.getDocumentElement();
+        NodeList nodeList = rootElement.getElementsByTagName("bean");
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
             if (node instanceof Element) {
