@@ -6,6 +6,6 @@ import com.minispring.stage4.annotation.Component;
 public class UserDao {
 
     public void sayHello() {
-        System.out.println("UserDao Hello!");
+        System.out.println("查询用户信息成功！");
     }
 }
